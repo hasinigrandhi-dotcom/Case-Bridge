@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Dashboard - CaseBridge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CaseBridge</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <button onclick="logoutCitizen()">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Citizen Dashboard</h2>
+            <p>Welcome to your CaseBridge dashboard.</p>
+        </section>
+
+        <section>
+            <h2>My Cases</h2>
+
+            <div class="feature-card">
+                <h3>Submit a New Case</h3>
+                <p>Report an incident and provide the necessary details.</p>
+                <button onclick="window.location.href='submit-case.html'">
+    Submit Case
+</button>
+            </div>
+
+            <div class="feature-card">
+                <h3>Track My Cases</h3>
+                <p>View the status and updates of your submitted cases.</p>
+                <button onclick="window.location.href='my-cases.html'">
+    View Cases
+</button>
+</div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 CaseBridge</p>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>

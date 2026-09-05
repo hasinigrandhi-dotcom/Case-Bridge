@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Citizen Login - CaseBridge</title>
+    <title>Citizen Registration - CaseBridge</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -27,14 +27,26 @@
 
             <div class="login-box">
 
-                <h1>Citizen Login</h1>
+                <h1>Create Account</h1>
 
                 <p class="login-subtitle">
-                    Login to access your CaseBridge account
+                    Register as a CaseBridge citizen
                 </p>
 
 
-                <form onsubmit="loginCitizen(event)">
+                <form onsubmit="registerCitizen(event)">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
 
                     <label for="email">
                         Email Address
@@ -55,21 +67,21 @@
                     <input
                         type="password"
                         id="password"
-                        placeholder="Enter your password"
+                        placeholder="Create a password"
                         required
                     >
 
 
                     <button type="submit">
-                        Login
+                        Create Account
                     </button>
 
                 </form>
 
 
                 <p class="register-text">
-                    Don't have an account?
-                    <a href="#">Create Account</a>
+                    Already have an account?
+                    <a href="citizen-login.html">Login</a>
                 </p>
 
             </div>
@@ -82,7 +94,10 @@
     <footer>
         <p>© 2026 CaseBridge | College Project</p>
     </footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+
 </body>
+
 </html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Login - CaseBridge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CaseBridge</h1>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="login-container">
+            <h2>Police Login</h2>
+            <p>Authorized police personnel only.</p>
+
+            <form onsubmit="loginPolice(event)">
+
+                <label for="policeEmail">Email</label>
+                <input type="email" id="policeEmail" required>
+
+                <label for="policePassword">Password</label>
+                <input type="password" id="policePassword" required>
+
+                <button type="submit">Login</button>
+
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 CaseBridge</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

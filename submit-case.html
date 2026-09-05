@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Case - CaseBridge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CaseBridge</h1>
+        <nav>
+            <a href="citizen.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Submit a New Case</h2>
+            <p>Provide the details of your complaint or incident.</p>
+        </section>
+
+        <section>
+            <form id="caseForm" onsubmit="submitCase(event)">
+
+                <label for="title">Case Title</label>
+                <input type="text" id="title" placeholder="Enter case title" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" placeholder="Describe the incident" required></textarea>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Where did the incident happen?" required>
+
+                <label for="incidentDate">Incident Date</label>
+                <input type="date" id="incidentDate" required>
+
+                <button type="submit">Submit Case</button>
+
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 CaseBridge</p>
+    </footer>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>

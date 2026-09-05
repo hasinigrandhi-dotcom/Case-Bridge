@@ -220,7 +220,7 @@ footer {
     }
 
     nav {
-        display: none;
+        display: flex;
     }
 }
 /* Login Page */
@@ -299,4 +299,40 @@ footer {
 .register-text a {
     color: #2563eb;
     text-decoration: none;
+}
+.case-timeline {
+    margin-top: 15px;
+    border-left: 3px solid #2563eb;
+    padding-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -29px;
+    top: 0;
+    font-size: 18px;
+}
+
+.timeline-content {
+    background: #f5f7fb;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.timeline-content strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timeline-content p {
+    margin: 5px 0;
+}
+
+.timeline-content small {
+    color: #666;
 }

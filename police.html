@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Dashboard - CaseBridge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>CaseBridge</h1>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <button onclick="logoutPolice()">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <h2>Police Dashboard</h2>
+            <p>Manage and review citizen cases.</p>
+        </section>
+
+        <section>
+            <h2>Case Management</h2>
+
+            <div class="feature-card">
+                <h3>View All Cases</h3>
+                <p>View cases submitted by citizens.</p>
+                <button onclick="window.location.href='police-cases.html'">
+    View Cases
+</button>
+            </div>
+
+        <div class="feature-card">
+    <h3>Case Updates</h3>
+    <p>Update the status and investigation details of cases.</p>
+    <button onclick="window.location.href='police-cases.html'">
+        Manage Cases
+    </button>
+</div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 CaseBridge</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+    <script>
+    checkPoliceAccess();
+</script>
+</body>
+</html>
