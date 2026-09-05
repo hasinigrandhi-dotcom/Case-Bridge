@@ -153,132 +153,228 @@ async function loadMyCases() {
         .order("created_at", { ascending: false });
 
     if (error) {
-        casesList.innerHTML = "<p>Unable to load cases: " + error.message + "</p>";
+        casesList.innerHTML =
+            "<p>Failed to load cases: " + error.message + "</p>";
         return;
     }
 
     if (data.length === 0) {
-        casesList.innerHTML = "<p>You have not submitted any cases yet.</p>";
+        casesList.innerHTML =
+            "<p>You have not submitted any cases yet.</p>";
         return;
     }
 
     casesList.innerHTML = "";
 
     data.forEach(function(caseItem) {
+
         casesList.innerHTML += `
             <div class="feature-card">
-                <h3>${caseItem.case_number}</h3>
-                <p><strong>Title:</strong> ${caseItem.title}</p>
-                <p><strong>Status:</strong> ${caseItem.status}</p>
-                <p><strong>Location:</strong> ${caseItem.location}</p>
-                <p><strong>Incident Date:</strong> ${caseItem.incident_date}</p>
-            </div>
-        `;
-    });
-}
-async function loadMyCases() {
-    const casesList = document.getElementById("casesList");
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-
-    if (!user) {
-        casesList.innerHTML = "<p>Please login first.</p>";
-        return;
-    }
-
-    const { data, error } = await supabaseClient
-        .from("cases")
-        .select("*")
-        .eq("citizen_id", user.id)
-        .order("created_at", { ascending: false });
-
-    if (error) {
-        casesList.innerHTML = "<p>Failed to load cases: " + error.message + "</p>";
-        return;
-    }
-
-    if (data.length === 0) {
-        casesList.innerHTML = "<p>You have not submitted any cases yet.</p>";
-        return;
-    }
-
-    casesList.innerHTML = "";
-
-    data.forEach(function(caseItem) {
-        casesList.innerHTML += `
-            <div class="feature-card">
                 <h3>${caseItem.title}</h3>
-                <p><strong>Case ID:</strong> ${caseItem.case_number}</p>
-                <p><strong>Status:</strong> ${caseItem.status}</p>
-                <p><strong>Location:</strong> ${caseItem.location}</p>
-                <p><strong>Incident Date:</strong> ${caseItem.incident_date}</p>
+
+                <p>
+                    <strong>Case ID:</strong>
+                    ${caseItem.case_number}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    ${caseItem.location}
+                </p>
+
+                <p>
+                    <strong>Incident Date:</strong>
+                    ${caseItem.incident_date}
+                </p>
+
+                <div class="case-flow">
+
+                    <div class="flow-step ${caseItem.status === "submitted" ? "active" : ""}">
+                        <span>1</span>
+                        <small>Submitted</small>
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step ${caseItem.status === "under_review" ? "active" : ""}">
+                        <span>2</span>
+                        <small>Under Review</small>
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step ${caseItem.status === "assigned" ? "active" : ""}">
+                        <span>3</span>
+                        <small>Assigned</small>
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step ${caseItem.status === "investigation" ? "active" : ""}">
+                        <span>4</span>
+                        <small>Investigation</small>
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step ${caseItem.status === "resolved" ? "active" : ""}">
+                        <span>5</span>
+                        <small>Resolved</small>
+                    </div>
+
+                    <div class="flow-line"></div>
+
+                    <div class="flow-step ${caseItem.status === "closed" ? "active" : ""}">
+                        <span>6</span>
+                        <small>Closed</small>
+                    </div>
+
+                </div>
+
                 <p>${caseItem.description}</p>
-             <div id="updates-${caseItem.id}">
-                <p>No Updates yet.</p>
-            </div>   
+
+                <!-- Separate chat area for THIS case -->
+                <div id="updates-${caseItem.id}">
+                    <p>Loading messages...</p>
+                </div>
+
             </div>
         `;
+
         loadCaseUpdates(caseItem.id);
     });
 }
 async function loadCaseUpdates(caseId) {
-
     const updatesBox = document.getElementById("updates-" + caseId);
+
+    if (!updatesBox) {
+        return;
+    }
+
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        updatesBox.innerHTML = "<p>Please login first.</p>";
+        return;
+    }
 
     const { data, error } = await supabaseClient
         .from("case_updates")
-        .select("message, status, created_at")
+        .select("id, case_id, created_by, message, created_at")
         .eq("case_id", caseId)
         .order("created_at", { ascending: true });
 
     if (error) {
-        console.log("Update error:", error);
-        updatesBox.innerHTML = "<p>Unable to load updates.</p>";
-        return;
-    }
+        console.error("Case chat error:", error);
 
-    if (!data || data.length === 0) {
         updatesBox.innerHTML = `
-            <h4>Case Timeline</h4>
-            <p>No updates yet.</p>
-        `;
-        return;
-    }
-
-    let html = "<h4>Case Timeline</h4>";
-
-    data.forEach(function(update) {
-
-        let statusText = "";
-
-        if (update.status) {
-            statusText = update.status
-                .replaceAll("_", " ")
-                .replace(/\b\w/g, function(letter) {
-                    return letter.toUpperCase();
-                });
-        }
-
-        html += `
-            <div class="timeline-item">
-                <div class="timeline-dot">●</div>
-
-                <div class="timeline-content">
-                    <strong>Police Update</strong>
-
-                    <p>${update.message}</p>
-
-                    ${statusText ? `<p><strong>Status:</strong> ${statusText}</p>` : ""}
-
-                    <small>
-                        ${new Date(update.created_at).toLocaleString()}
-                    </small>
-                </div>
+            <div class="chat-box">
+                <h4>Case Chat</h4>
+                <p style="color:red;">
+                    Chat error: ${error.message}
+                </p>
             </div>
         `;
-    });
 
-    updatesBox.innerHTML = html;
+        return;
+    }
+
+    let messagesHTML = `
+        <div class="chat-box">
+            <h4>💬 Case Chat</h4>
+
+            <div class="messages-list">
+    `;
+
+    if (!data || data.length === 0) {
+
+        messagesHTML += `
+            <p class="no-messages">
+                No messages yet.
+            </p>
+        `;
+
+    } else {
+
+        data.forEach(function(update) {
+
+            const isMe = update.created_by === user.id;
+
+            messagesHTML += `
+                <div class="message ${isMe ? "citizen-message" : "police-message"}">
+
+                    <div class="message-name">
+                        ${isMe ? "👤 You" : "👮 Police"}
+                    </div>
+
+                    <div class="message-text">
+                        ${update.message}
+                    </div>
+
+                    <div class="message-time">
+                        ${new Date(update.created_at).toLocaleString()}
+                    </div>
+
+                </div>
+            `;
+        });
+    }
+
+    messagesHTML += `
+            </div>
+
+            <div class="chat-input">
+
+                <textarea
+                    id="chat-${caseId}"
+                    placeholder="Type your message to the police..."
+                ></textarea>
+
+                <button onclick="sendCitizenMessage('${caseId}')">
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    updatesBox.innerHTML = messagesHTML;
+}
+async function sendCitizenMessage(caseId) {
+
+    const messageBox = document.getElementById("chat-" + caseId);
+    const message = messageBox.value.trim();
+
+    if (message === "") {
+        alert("Please type a message.");
+        return;
+    }
+
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        alert("Please login first.");
+        return;
+    }
+
+    const { error } = await supabaseClient
+        .from("case_updates")
+        .insert([{
+            case_id: caseId,
+            created_by: user.id,
+            message: message
+        }]);
+
+    if (error) {
+        alert("Failed to send message: " + error.message);
+        return;
+    }
+
+    messageBox.value = "";
+
+    loadCaseUpdates(caseId);
 }
 async function logoutCitizen() {
     const { error } = await supabaseClient.auth.signOut();
@@ -308,6 +404,18 @@ async function loginPolice(event) {
 
     if (error) {
         alert("Police login failed: " + error.message);
+        return;
+    }
+
+    const { data: profile, error: profileError } = await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", data.user.id)
+        .single();
+
+    if (profileError || !profile || profile.role !== "police") {
+        alert("This account is not authorized for police login.");
+        await supabaseClient.auth.signOut();
         return;
     }
 
@@ -434,6 +542,19 @@ async function checkPoliceAccess() {
         window.location.href = "police-login.html";
         return;
     }
+
+    const { data: profile, error } = await supabaseClient
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+    if (error || !profile || profile.role !== "police") {
+        alert("Access denied. Police personnel only.");
+        await supabaseClient.auth.signOut();
+        window.location.href = "police-login.html";
+        return;
+    }
 }
 async function updateCaseStatus(caseId, newStatus) {
 
@@ -486,7 +607,6 @@ async function updateCaseStatus(caseId, newStatus) {
     loadPoliceCases();
 }
 async function sendCaseUpdate(caseId) {
-
     const updateBox = document.getElementById("update-" + caseId);
     const message = updateBox.value.trim();
 
@@ -504,20 +624,33 @@ async function sendCaseUpdate(caseId) {
 
     const { error } = await supabaseClient
         .from("case_updates")
-        .insert([
-            {
-                case_id: caseId,
-                created_by: user.id,
-                message: message
-            }
-        ]);
+        .insert([{
+            case_id: caseId,
+            created_by: user.id,
+            message: message
+        }]);
 
     if (error) {
         alert("Failed to send update: " + error.message);
         return;
     }
 
-    alert("Update sent to the citizen!");
-
     updateBox.value = "";
+
+    alert("Message sent to citizen!");
+
+    loadPoliceCases();
 }
+setInterval(function () {
+
+    const chatBoxes = document.querySelectorAll('[id^="updates-"]');
+
+    chatBoxes.forEach(function(box) {
+
+        const caseId = box.id.replace("updates-", "");
+
+        loadCaseUpdates(caseId);
+
+    });
+
+}, 3000);

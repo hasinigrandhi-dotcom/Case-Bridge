@@ -1,121 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CaseBridge</title>
+    <title>CaseBridge | Citizen–Police Case Management</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">CaseBridge</div>
+    <!-- NAVBAR -->
+    <header class="modern-header">
+
+        <div class="brand">
+            <div class="brand-icon">CB</div>
+
+            <div>
+                <h1>CaseBridge</h1>
+                <span>Citizen • Police • Connected</span>
+            </div>
+        </div>
 
         <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+
+            <button class="nav-login"
+                onclick="window.location.href='citizen-login.html'">
+                Login
+            </button>
         </nav>
+
     </header>
 
 
+    <!-- HERO -->
     <main>
 
-        <section class="hero">
+        <section class="modern-hero">
 
-            <div class="hero-text">
+            <div class="hero-content">
 
-                <h1>
-                    Connect Citizens and Police
-                    <span>Through One Platform</span>
-                </h1>
+                <div class="hero-badge">
+                    ● Secure Case Management Platform
+                </div>
+
+                <h2>
+                    Connecting Citizens
+                    <span> & Police</span>
+                    Through One Platform
+                </h2>
 
                 <p>
-                    CaseBridge helps citizens submit and track cases
-                    while allowing authorized police officers to manage
-                    investigations efficiently.
+                    CaseBridge provides a simple digital platform for
+                    submitting, managing and tracking cases between
+                    citizens and authorized police personnel.
                 </p>
 
-                <div class="buttons">
-                    <button onclick="window.location.href='citizen-login.html'">
-                        Citizen Login
+                <div class="hero-buttons">
+
+                    <button
+                        onclick="window.location.href='citizen-login.html'">
+                        Citizen Portal →
                     </button>
 
-                   <button onclick="window.location.href='police-login.html'">
-    Police Login
-</button> 
+                    <button
+                        class="secondary-button"
+                        onclick="window.location.href='police-login.html'">
+                        Police Portal →
+                    </button>
+
+                </div>
+
+                <div class="hero-trust">
+                    <span>✓ Easy case submission</span>
+                    <span>✓ Case tracking</span>
+                    <span>✓ Police updates</span>
                 </div>
 
             </div>
 
 
-            <div class="hero-card">
+            <!-- HERO VISUAL -->
+            <div class="hero-visual">
 
-                <div class="card-icon">⚖️</div>
+                <div class="dashboard-preview">
 
-                <h2>Case Management</h2>
+                    <div class="preview-top">
+                        <span>CaseBridge Dashboard</span>
+                        <span class="online-dot">● Online</span>
+                    </div>
 
-                <p>
-                    Submit complaints, track case progress,
-                    and communicate securely.
-                </p>
+                    <div class="preview-card">
+
+                        <div class="preview-icon">📋</div>
+
+                        <div>
+                            <small>CASE ID</small>
+                            <strong>CB-2026-001</strong>
+                        </div>
+
+                        <span class="status-badge">
+                            Under Review
+                        </span>
+
+                    </div>
+
+                    <div class="preview-card">
+
+                        <div class="preview-icon">👮</div>
+
+                        <div>
+                            <small>POLICE UPDATE</small>
+                            <strong>Investigation in progress</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="preview-timeline">
+
+                        <div class="preview-line"></div>
+
+                        <div class="preview-step">
+                            <span>●</span>
+                            <div>
+                                <strong>Case Submitted</strong>
+                                <small>Citizen submitted a case</small>
+                            </div>
+                        </div>
+
+                        <div class="preview-step">
+                            <span>●</span>
+                            <div>
+                                <strong>Under Review</strong>
+                                <small>Police are reviewing the case</small>
+                            </div>
+                        </div>
+
+                        <div class="preview-step">
+                            <span>●</span>
+                            <div>
+                                <strong>Investigation</strong>
+                                <small>Investigation update available</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </section>
 
 
-        <section class="features">
+        <!-- ROLE SECTION -->
+        <section class="role-section">
 
-            <h2>How CaseBridge Works</h2>
+            <div class="section-heading">
 
-            <div class="feature-container">
+                <span>ACCESS PORTALS</span>
 
-                <div class="feature">
-                    <div class="feature-icon">📝</div>
-                    <h3>Submit Case</h3>
+                <h2>
+                    Built for both sides of the case
+                </h2>
+
+                <p>
+                    Different tools for citizens and authorized police personnel.
+                </p>
+
+            </div>
+
+
+            <div class="role-grid">
+
+                <!-- CITIZEN -->
+                <div class="role-card citizen-role">
+
+                    <div class="role-icon">👤</div>
+
+                    <div class="role-tag">
+                        CITIZEN
+                    </div>
+
+                    <h3>Citizen Portal</h3>
+
                     <p>
-                        Citizens can submit complaints
-                        and provide case information.
+                        Submit complaints, receive a unique Case ID,
+                        track your case and view police updates.
                     </p>
+
+                    <ul>
+                        <li>Submit a new case</li>
+                        <li>Track case status</li>
+                        <li>View case timeline</li>
+                    </ul>
+
+                    <button
+                        onclick="window.location.href='citizen-login.html'">
+                        Enter Citizen Portal →
+                    </button>
+
                 </div>
 
 
-                <div class="feature">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Track Case</h3>
+                <!-- POLICE -->
+                <div class="role-card police-role">
+
+                    <div class="role-icon">👮</div>
+
+                    <div class="role-tag">
+                        AUTHORIZED PERSONNEL
+                    </div>
+
+                    <h3>Police Portal</h3>
+
                     <p>
-                        Citizens can check the current
-                        status of their case.
+                        Review citizen cases, update case status
+                        and communicate investigation progress.
+                    </p>
+
+                    <ul>
+                        <li>View submitted cases</li>
+                        <li>Update case status</li>
+                        <li>Send case updates</li>
+                    </ul>
+
+                    <button
+                        onclick="window.location.href='police-login.html'">
+                        Enter Police Portal →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+        <section id="features" class="features-section">
+
+            <div class="section-heading">
+
+                <span>KEY FEATURES</span>
+
+                <h2>
+                    Everything in one place
+                </h2>
+
+                <p>
+                    CaseBridge simplifies the case-management process.
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+                <div class="modern-feature">
+                    <div class="feature-number">01</div>
+                    <h3>Case Submission</h3>
+                    <p>
+                        Citizens can submit incident details through
+                        a structured digital form.
                     </p>
                 </div>
 
-
-                <div class="feature">
-                    <div class="feature-icon">👮</div>
-                    <h3>Police Management</h3>
+                <div class="modern-feature">
+                    <div class="feature-number">02</div>
+                    <h3>Unique Case ID</h3>
                     <p>
-                        Authorized officers can manage
-                        and update cases.
+                        Every submitted case receives a unique
+                        CaseBridge identification number.
+                    </p>
+                </div>
+
+                <div class="modern-feature">
+                    <div class="feature-number">03</div>
+                    <h3>Status Tracking</h3>
+                    <p>
+                        Citizens can monitor the current status
+                        of their submitted cases.
+                    </p>
+                </div>
+
+                <div class="modern-feature">
+                    <div class="feature-number">04</div>
+                    <h3>Police Updates</h3>
+                    <p>
+                        Authorized police personnel can provide
+                        investigation updates to citizens.
                     </p>
                 </div>
 
             </div>
+
+        </section>
+
+
+        <!-- HOW IT WORKS -->
+        <section id="how-it-works" class="how-section">
+
+            <div class="section-heading">
+
+                <span>HOW IT WORKS</span>
+
+                <h2>
+                    Simple. Connected. Transparent.
+                </h2>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+                <div class="step-card">
+                    <div class="step-circle">1</div>
+                    <h3>Submit</h3>
+                    <p>
+                        Citizen submits the incident details.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-circle">2</div>
+                    <h3>Review</h3>
+                    <p>
+                        Police personnel review the submitted case.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-circle">3</div>
+                    <h3>Investigate</h3>
+                    <p>
+                        The case moves through the investigation process.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-circle">4</div>
+                    <h3>Track</h3>
+                    <p>
+                        The Case is resolved and the citizen receives the latest Updates.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+
+            <div>
+                <span>CASEBRIDGE</span>
+
+                <h2>
+                    A digital bridge between citizens and police.
+                </h2>
+
+                <p>
+                    Making case management simpler and more accessible.
+                </p>
+            </div>
+
+            <button
+                onclick="window.location.href='citizen-register.html'">
+                Get Started →
+            </button>
 
         </section>
 
     </main>
 
 
-    <footer>
-        <p>© 2026 CaseBridge | College Project</p>
+    <!-- FOOTER -->
+    <footer class="modern-footer">
+
+        <div>
+            <strong>CaseBridge</strong>
+            <p>
+                Citizen–Police Case Management Platform
+            </p>
+        </div>
+
+        <div>
+            <p>© 2026 CaseBridge</p>
+            <p>College Project</p>
+        </div>
+
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 
 </body>
+
 </html>
